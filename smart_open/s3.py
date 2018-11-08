@@ -535,7 +535,7 @@ def _list_bucket(bucket_name, prefix='', accept_key=lambda k: True):
     ctoken = None
 
     while True:
-        response = client.list_objects_v2(Bucket=bucket_name, Prefix=prefix)
+        response = client.list_objects_v2(Bucket=bucket_name, Prefix=prefix, **({'ContinuationToken': ctoken} if ctoken else {}))
         try:
             content = response['Contents']
         except KeyError:
